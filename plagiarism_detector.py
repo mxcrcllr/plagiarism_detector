@@ -23,11 +23,12 @@ def check_plagiarism():
         current_index = new_vectors.index((sample_a, text_vector_a))
         del new_vectors[current_index]
         for sample_b, text_vector_b in new_vectors:
-            sim_score = similarity(text_vector_a, text_vector_b)[0][1]
+            sim_score = similarity(text_vector_a, text_vector_b)[0][1] * 100  # Convert to percentage
             sample_pair = sorted((sample_a, sample_b))
             score = sample_pair[0], sample_pair[1], sim_score
             results.add(score)
     return results
 
 for data in check_plagiarism():
-    print(data)
+    print(f"{data[0]} and {data[1]} have a similarity of {data[2]:.2f}%")
+
